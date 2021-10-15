@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public static void main(String[] args) throws Exception {
         System.out.println("welcome to the clothing-design-style machine-learning classifier");
         System.out.println("you can create a new set of data entries to train your model by entering 'e', "

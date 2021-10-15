@@ -34,6 +34,7 @@ public class MLAlgorithm {
 
 
     //    EFFECTS: makes predictions for inputed list of data entries using ML model specified by filename
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public List<Entry> naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
         DataSource data = new DataSource(filename);
 
