@@ -13,8 +13,8 @@ public class ArffWriter {
     }
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public String createArffFromModelEntries(List<EntryM> loe) throws IOException {
-        String fileName = "";
+    public String createArffFromModelEntries(List<EntryM> loe, String fn) throws IOException {
+        String fileName = fn;
         String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
                 + "abcdefghijklmnopqrstuvxyz";
@@ -31,16 +31,16 @@ public class ArffWriter {
 
         String colorUnique = "@attribute color {";
         String lengthUnique = "@attribute length {";
-        String thicknessUnique = "@attribute width {";
+        String thicknessUnique = "@attribute thicness {";
         String warmthUnique = "@attribute warmth {";
         String fabricStitchDensityUnique = "@attribute 'fabric stitch density' {";
         String shinyUnique = "@attribute shiny? {";
         String numClorsUnique = "@attribute 'num of colors' numeric";
         String bodyLineUnique = "@attribute 'body contourline' {";
-        String stiffnessUnique = "@attribute stiffness {";
+        String stiffnessUnique = "@attribute stifness {";
         String waterResistanceUnique = "@attribute water-ready? {";
         String materialUnique = "@attribute material {";
-        String fitUnique = "@attribute 'fit ' {";
+        String fitUnique = "@attribute fit {";
         String patternUnique = "@attribute pattern {";
         String contrastVibrancyUnique = "@attribute contrast/vibrancy {";
         String classifcicationUnique = "@attribute class {";
@@ -83,44 +83,44 @@ public class ArffWriter {
                 patternUnique += "'" + e.pattern.trim() + "'" + ", ";
             }
             if (!contrastVibrancyUnique.contains(e.contrastVibrancy.trim())) {
-                classifcicationUnique += "'" + e.contrastVibrancy.trim() + "'" + ", ";
+                contrastVibrancyUnique += "'" + e.contrastVibrancy.trim() + "'" + ", ";
             }
             if (!classifcicationUnique.contains(e.classifcication.trim())) {
                 classifcicationUnique += "'" + e.classifcication.trim() + "'" + ", ";
             }
         }
 
-        colorUnique.substring(0, colorUnique.length() - 1);
+        colorUnique = colorUnique.substring(0, colorUnique.length() - 2);
         colorUnique += "}";
-        lengthUnique.substring(0, lengthUnique.length() - 2);
+        lengthUnique = lengthUnique.substring(0, lengthUnique.length() - 2);
         lengthUnique += "}";
-        thicknessUnique.substring(0, thicknessUnique.length() - 2);
+        thicknessUnique = thicknessUnique.substring(0, thicknessUnique.length() - 2);
         thicknessUnique += "}";
-        warmthUnique.substring(0, warmthUnique.length() - 2);
+        warmthUnique = warmthUnique.substring(0, warmthUnique.length() - 2);
         warmthUnique += "}";
-        fabricStitchDensityUnique.substring(0, fabricStitchDensityUnique.length() - 2);
+        fabricStitchDensityUnique = fabricStitchDensityUnique.substring(0, fabricStitchDensityUnique.length() - 2);
         fabricStitchDensityUnique += "}";
-        shinyUnique.substring(0, shinyUnique.length() - 2);
+        shinyUnique = shinyUnique.substring(0, shinyUnique.length() - 2);
         shinyUnique += "}";
-        bodyLineUnique.substring(0, bodyLineUnique.length() - 2);
+        bodyLineUnique = bodyLineUnique.substring(0, bodyLineUnique.length() - 2);
         bodyLineUnique += "}";
-        stiffnessUnique.substring(0, stiffnessUnique.length() - 2);
+        stiffnessUnique = stiffnessUnique.substring(0, stiffnessUnique.length() - 2);
         stiffnessUnique += "}";
-        waterResistanceUnique.substring(0, waterResistanceUnique.length() - 2);
+        waterResistanceUnique = waterResistanceUnique.substring(0, waterResistanceUnique.length() - 2);
         waterResistanceUnique += "}";
-        materialUnique.substring(0, materialUnique.length() - 2);
+        materialUnique = materialUnique.substring(0, materialUnique.length() - 2);
         materialUnique += "}";
-        fitUnique.substring(0, fitUnique.length() - 2);
+        fitUnique = fitUnique.substring(0, fitUnique.length() - 2);
         fitUnique += "}";
-        patternUnique.substring(0, patternUnique.length() - 2);
+        patternUnique = patternUnique.substring(0, patternUnique.length() - 2);
         patternUnique += "}";
-        contrastVibrancyUnique.substring(0, contrastVibrancyUnique.length() - 2);
+        contrastVibrancyUnique = contrastVibrancyUnique.substring(0, contrastVibrancyUnique.length() - 2);
         contrastVibrancyUnique += "}";
-        classifcicationUnique.substring(0, classifcicationUnique.length() - 2);
+        classifcicationUnique = classifcicationUnique.substring(0, classifcicationUnique.length() - 2);
         classifcicationUnique += "}";
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write("@relation '" + fileName + "'");
+        writer.write("@relation 'clothes.arff'");
         writer.newLine();
         writer.write(colorUnique);
         writer.newLine();
@@ -133,6 +133,8 @@ public class ArffWriter {
         writer.write(fabricStitchDensityUnique);
         writer.newLine();
         writer.write(shinyUnique);
+        writer.newLine();
+        writer.write(bodyLineUnique);
         writer.newLine();
         writer.write(numClorsUnique);
         writer.newLine();
@@ -157,7 +159,7 @@ public class ArffWriter {
 
         for (EntryM e : loe) {
             String line = e.color + "," + e.length + "," + e.thickness + "," + e.warmth + "," + e.fabricStitchDensity
-                    + "," + e.shiny + "," + e.numClors + "," + e.bodyLine + "," + e.stiffness + "," + e.waterResistance
+                    + "," + e.shiny + "," + e.bodyLine + "," + e.numClors + "," + e.stiffness + "," + e.waterResistance
                     + "," + e.material + "," + e.fit + "," + e.pattern + "," + e.contrastVibrancy + ","
                     + e.classifcication;
             writer.write(line);
@@ -166,5 +168,5 @@ public class ArffWriter {
         writer.flush();
         writer.close();
         return fileName;
-    }        
+    }
 }

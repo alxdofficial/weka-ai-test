@@ -30,5 +30,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="weka" level="project" />
+    <orderEntry type="library" name="commons-io-2.11.0" level="project" />
   </component>
 </module>

@@ -21,9 +21,10 @@ public class Entry {
     @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public String classifcication;
 
-    public Entry(String id, String itemName, String color, String length, String thickness, String warmth, String fabricStitchDensity,
+    public Entry(String id, String itemName, String color, String length, String thickness, String warmth,
+                 String fabricStitchDensity,
                  String shiny, int numClors, String bodyLine, String stiffness, String waterResistance, String material,
-                 String material1, String fit, String pattern, String contrastVibrancy) {
+                 String fit, String pattern, String contrastVibrancy) {
         this.id = id;
         this.itemName = itemName;
         this.color = color;
@@ -36,7 +37,7 @@ public class Entry {
         this.bodyLine = bodyLine;
         this.stiffness = stiffness;
         this.waterResistance = waterResistance;
-        this.material = material1;
+        this.material = material;
         this.fit = fit;
         this.pattern = pattern;
         this.contrastVibrancy = contrastVibrancy;
