@@ -12,8 +12,12 @@ public class ArffWriter {
         
     }
 
+    //    EFFECTS: takes in a list of dataset entries and a file name.
+    //    create arff file of the entries in the project directory or a user specified location.
+
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public String createArffFromModelEntries(List<EntryM> loe, String fn) throws IOException {
+        //    generate filename
         String fileName = fn;
         String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 + "0123456789"
@@ -27,8 +31,11 @@ public class ArffWriter {
         }
         fileName += ".arff";
 
+
+        // create empty file at location
         File newArff = new File(fileName);
 
+        //prep strings for the header of the arff file
         String colorUnique = "@attribute color {";
         String lengthUnique = "@attribute length {";
         String thicknessUnique = "@attribute thicness {";
@@ -45,6 +52,9 @@ public class ArffWriter {
         String contrastVibrancyUnique = "@attribute contrast/vibrancy {";
         String classifcicationUnique = "@attribute class {";
 
+        // look for all the values of every attribute the user has inputted in the dataset, then add unique
+        // values to the headers of the arff file. this is because each attribute is a nominal type,
+        // and every value in the data must first be declared.
         for (EntryM e : loe) {
             if (!colorUnique.contains(e.color.trim())) {
                 colorUnique += "'" + e.color.trim() + "'" + ", ";
@@ -90,6 +100,7 @@ public class ArffWriter {
             }
         }
 
+        // finish up header and correct the syntax
         colorUnique = colorUnique.substring(0, colorUnique.length() - 2);
         colorUnique += "}";
         lengthUnique = lengthUnique.substring(0, lengthUnique.length() - 2);
@@ -119,6 +130,8 @@ public class ArffWriter {
         classifcicationUnique = classifcicationUnique.substring(0, classifcicationUnique.length() - 2);
         classifcicationUnique += "}";
 
+
+        // actually writing to strings crreate above to the empty file
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write("@relation 'clothes.arff'");
         writer.newLine();
@@ -157,6 +170,8 @@ public class ArffWriter {
         writer.newLine();
 
 
+        // for each data entry, format its values in order of the attributes, then make them comma seperated
+        // the values in the entrys have already been trimmed
         for (EntryM e : loe) {
             String line = e.color + "," + e.length + "," + e.thickness + "," + e.warmth + "," + e.fabricStitchDensity
                     + "," + e.shiny + "," + e.bodyLine + "," + e.numClors + "," + e.stiffness + "," + e.waterResistance

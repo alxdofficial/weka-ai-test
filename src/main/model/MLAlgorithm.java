@@ -17,42 +17,41 @@ import java.lang.Character;
 
 
 public class MLAlgorithm {
-//    private List<EntryM> modelEntries;
     private List<Entry> categorizationEntries;
 
 
     public MLAlgorithm() {
-//        modelEntries = new ArrayList<>();
         categorizationEntries = new ArrayList<>();
 
     }
 
-//    public void addToModelEntry(List<EntryM> loe) {
-//        modelEntries.addAll(loe);
-//    }
-
+//    MODIFIES: this
+//    EFFECTS: add to the list of entrys used for categorization
     public void addToCatEntry(List<Entry> loe) {
         categorizationEntries.addAll(loe);
     }
 
 
+
+    //    EFFECTS: makes predictions for inputed list of data entries using ML model specified by filename
     public List<Entry> naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
         DataSource data = new DataSource(filename);
 
         // Create dataset instances
         Instances datasetInstances = data.getDataSet();
         datasetInstances.setClassIndex(datasetInstances.numAttributes() - 1);
+        //new naive bayes
         NaiveBayes nb = new NaiveBayes();
         nb.buildClassifier(datasetInstances);
+        //cross validation and sumary printing
         Instances test = datasetInstances;
         Evaluation eval = new Evaluation(test);
         eval.evaluateModel(nb,test);
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));
 
 
-
         List<Entry> answer = new ArrayList<>();
-
+// create instances of the unlabled entries and assigns them to the dataset of the trained ML model
         for (Entry e : loe) {
             Instance i = new DenseInstance(15);
             i.setDataset(datasetInstances);
@@ -82,6 +81,7 @@ public class MLAlgorithm {
         return answer;
     }
 
+    //    EFFECTS: get entries about to be used for categorization
     public List<Entry> getCatEntries() {
         return categorizationEntries;
     }

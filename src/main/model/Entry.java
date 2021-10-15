@@ -1,5 +1,9 @@
 package model;
 
+// a normal entry that the ml algorithm will try to predict
+// the public access is because this currently isnt stored or accessed by anything except for being printed
+// after the the predicitons are made. public will be modified to private once new functionality is added.
+
 public class Entry {
     public final String id;
     public final String itemName;
@@ -21,26 +25,28 @@ public class Entry {
     @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public String classifcication;
 
+    // EFFECTS create a new entry and trims leading and trailing spaces
+
     public Entry(String id, String itemName, String color, String length, String thickness, String warmth,
                  String fabricStitchDensity,
                  String shiny, int numClors, String bodyLine, String stiffness, String waterResistance, String material,
                  String fit, String pattern, String contrastVibrancy) {
-        this.id = id;
-        this.itemName = itemName;
-        this.color = color;
-        this.length = length;
-        this.thickness = thickness;
-        this.warmth = warmth;
-        this.fabricStitchDensity = fabricStitchDensity;
-        this.shiny = shiny;
+        this.id = id.trim();
+        this.itemName = itemName.trim();
+        this.color = color.trim();
+        this.length = length.trim();
+        this.thickness = thickness.trim();
+        this.warmth = warmth.trim();
+        this.fabricStitchDensity = fabricStitchDensity.trim();
+        this.shiny = shiny.trim();
         this.numClors = numClors;
-        this.bodyLine = bodyLine;
-        this.stiffness = stiffness;
-        this.waterResistance = waterResistance;
-        this.material = material;
-        this.fit = fit;
-        this.pattern = pattern;
-        this.contrastVibrancy = contrastVibrancy;
+        this.bodyLine = bodyLine.trim();
+        this.stiffness = stiffness.trim();
+        this.waterResistance = waterResistance.trim();
+        this.material = material.trim();
+        this.fit = fit.trim();
+        this.pattern = pattern.trim();
+        this.contrastVibrancy = contrastVibrancy.trim();
 
     }
 
