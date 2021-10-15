@@ -1,0 +1,19 @@
+@relation 'clothes.arff'
+@attribute color {'red'}
+@attribute length {'long'}
+@attribute thicness {'thick'}
+@attribute warmth {'high'}
+@attribute 'fabric stitch density' {'high'}
+@attribute shiny? {'no'}
+@attribute 'body contourline' {'hourglass'}
+@attribute 'num of colors' numeric
+@attribute stifness {'stiff'}
+@attribute water-ready? {'no'}
+@attribute material {'cotton'}
+@attribute fit {'tight'}
+@attribute pattern {'solid'}
+@attribute contrast/vibrancy {'high'}
+@attribute class {'urban'}
+
+@data
+red,long,thick,high,high,no,hourglass,1,stiff,no,cotton,tight,solid,high,urban
