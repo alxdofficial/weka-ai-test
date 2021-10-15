@@ -18,7 +18,7 @@
 @data
 beige,long,thin,mid,low,no,box,1,stretch,no,cotton,loose,grid,high,urban
 red,short,thick,high,high,yes,box,1,stiff,yes,wool,tight,solid,high,rustic
-red,short,mid,low ,high,no,flowy,1,mid,yes,synthetic,mid,line,high,minimalist
-blue,long,thick,low,high,yes ,flowy,1,stiff,yes,cotton,loose,solid,low,minimalist 
-grey,mid,thick ,mid,low,no,hourglass,1,stretch,no,wool,loose,graphic,low,rustic
-grey,long,thin,mid,mid ,no,hourglass,1,stretch,no,wool,loose,solid,low,rustic
+red,short,mid,low,high,no,flowy,1,mid,yes,synthetic,mid,line,high,minimalist
+blue,long,thick,low,high,yes,flowy,1,stiff,yes,cotton,loose,solid,low,minimalist
+grey,mid,thick,mid,low,no,hourglass,1,stretch,no,wool,loose,graphic,low,rustic
+grey,long,thin,mid,mid,no,hourglass,1,stretch,no,wool,loose,solid,low,rustic
