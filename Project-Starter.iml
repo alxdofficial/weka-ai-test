@@ -32,5 +32,6 @@
     <orderEntry type="library" exported="" name="weka" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="commons-io-2.11.0" level="project" />
     <orderEntry type="library" exported="" name="json-20210307" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="commons-io-2.11.0 (3)" level="project" />
   </component>
 </module>

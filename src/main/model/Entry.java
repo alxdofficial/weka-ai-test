@@ -61,14 +61,14 @@ public class Entry {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("id", id);
-        json.put("name", itemName);
+        json.put("itemName", itemName);
         json.put("color", this.color);
         json.put("length",this.length);
         json.put("thickness",this.thickness);
         json.put("warmth",this.warmth);
         json.put("fabricStitchDensity",this.fabricStitchDensity);
         json.put("shiny",this.shiny);
-        json.put("numClors",this.numColors);
+        json.put("numColors",this.numColors);
         json.put("bodyLine",this.bodyLine);
         json.put("stiffness",this.stiffness);
         json.put("waterResistance",this.waterResistance);

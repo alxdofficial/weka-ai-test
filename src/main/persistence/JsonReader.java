@@ -47,7 +47,6 @@ public class JsonReader {
         JSONArray jsonArray = jsonObject.getJSONArray("loce");
         for (Object json : jsonArray) {
             JSONObject e = (JSONObject) json;
-
             String id = e.getString("id");
             String itemName = e.getString("itemName");
             String color = e.getString("color");
@@ -56,7 +55,7 @@ public class JsonReader {
             String warmth = e.getString("warmth");
             String fabricStitchDensity = e.getString("fabricStitchDensity");
             String shiny = e.getString("shiny");
-            int numColors = Integer.parseInt(e.getString("numColors"));
+            int numColors = e.getInt("numColors");
             String bodyLine = e.getString("bodyLine");
             String stiffness = e.getString("stiffness");
             String waterResistance = e.getString("waterResistance");

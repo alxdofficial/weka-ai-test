@@ -33,8 +33,10 @@ public class CsvLoader {
             String newFilename = arffWriter.createArffFromModelEntries(loe, "");
             System.out.println("remember this file name, you will need it later. your filename is:");
             System.out.println(newFilename);
-            System.out.println("arff file created, restart the program to take effect");
-                
+            System.out.println("arff file created, the program will shutdown, restart to keep using");
+            System.exit(0);
+
+
         } catch (Exception e) {
             System.out.println("file does not exist or is of invalid type");
 

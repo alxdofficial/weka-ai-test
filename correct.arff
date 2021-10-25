@@ -5,8 +5,8 @@
 @attribute warmth {'mid', 'high', 'low'}
 @attribute 'fabric stitch density' {'low', 'high', 'mid'}
 @attribute shiny? {'no', 'yes'}
-@attribute 'body contourline' {'box', 'flowy', 'hourglass'}
 @attribute 'num of colors' numeric
+@attribute 'body contour line' {'box', 'flowy', 'hourglass'}
 @attribute stifness {'stretch', 'stiff', 'mid'}
 @attribute water-ready? {'no', 'yes'}
 @attribute material {'cotton', 'wool', 'synthetic'}
@@ -16,9 +16,9 @@
 @attribute class {'urban', 'rustic', 'minimalist'}
 
 @data
-beige,long,thin,mid,low,no,box,1,stretch,no,cotton,loose,grid,high,urban
-red,short,thick,high,high,yes,box,1,stiff,yes,wool,tight,solid,high,rustic
-red,short,mid,low,high,no,flowy,1,mid,yes,synthetic,mid,line,high,minimalist
-blue,long,thick,low,high,yes,flowy,1,stiff,yes,cotton,loose,solid,low,minimalist
-grey,mid,thick,mid,low,no,hourglass,1,stretch,no,wool,loose,graphic,low,rustic
-grey,long,thin,mid,mid,no,hourglass,1,stretch,no,wool,loose,solid,low,rustic
+beige,long,thin,mid,low,no,1,box,stretch,no,cotton,loose,grid,high,urban
+red,short,thick,high,high,yes,1,box,stiff,yes,wool,tight,solid,high,rustic
+red,short,mid,low,high,no,1,flowy,mid,yes,synthetic,mid,line,high,minimalist
+blue,long,thick,low,high,yes,1,flowy,stiff,yes,cotton,loose,solid,low,minimalist
+grey,mid,thick,mid,low,no,1,hourglass,stretch,no,wool,loose,graphic,low,rustic
+grey,long,thin,mid,mid,no,1,hourglass,stretch,no,wool,loose,solid,low,rustic

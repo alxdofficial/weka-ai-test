@@ -173,6 +173,7 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+        System.exit(0);
     }
 
     private static void loadListOfClassifyingEntries(List<Entry> loce) {
