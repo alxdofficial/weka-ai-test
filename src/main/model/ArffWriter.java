@@ -43,7 +43,7 @@ public class ArffWriter {
         String fabricStitchDensityUnique = "@attribute 'fabric stitch density' {";
         String shinyUnique = "@attribute shiny? {";
         String numClorsUnique = "@attribute 'num of colors' numeric";
-        String bodyLineUnique = "@attribute 'body contourline' {";
+        String bodyLineUnique = "@attribute 'body contour line' {";
         String stiffnessUnique = "@attribute stifness {";
         String waterResistanceUnique = "@attribute water-ready? {";
         String materialUnique = "@attribute material {";
@@ -147,9 +147,9 @@ public class ArffWriter {
         writer.newLine();
         writer.write(shinyUnique);
         writer.newLine();
-        writer.write(bodyLineUnique);
-        writer.newLine();
         writer.write(numClorsUnique);
+        writer.newLine();
+        writer.write(bodyLineUnique);
         writer.newLine();
         writer.write(stiffnessUnique);
         writer.newLine();
@@ -174,7 +174,7 @@ public class ArffWriter {
         // the values in the entrys have already been trimmed
         for (EntryM e : loe) {
             String line = e.color + "," + e.length + "," + e.thickness + "," + e.warmth + "," + e.fabricStitchDensity
-                    + "," + e.shiny + "," + e.bodyLine + "," + e.numClors + "," + e.stiffness + "," + e.waterResistance
+                    + "," + e.shiny + "," + e.numColors + "," + e.bodyLine + "," + e.stiffness + "," + e.waterResistance
                     + "," + e.material + "," + e.fit + "," + e.pattern + "," + e.contrastVibrancy + ","
                     + e.classifcication;
             writer.write(line);

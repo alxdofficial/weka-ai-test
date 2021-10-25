@@ -1,0 +1,73 @@
+@relation 'clothes.arff'
+@attribute color {'black', 'beige', 'blue', 'white', 'pink', 'red', 'grey', 'yellow', 'green'}
+@attribute length {'mid', 'long', 'short'}
+@attribute thicness {'thin', 'mid', 'thick'}
+@attribute warmth {'mid', 'high', 'low'}
+@attribute 'fabric stitch density' {'low', 'mid', 'high'}
+@attribute shiny? {'no', 'yes'}
+@attribute 'num of colors' numeric
+@attribute 'body contour line' {'hourglass', 'flowy', 'box'}
+@attribute stifness {'stretch', 'mid', 'stiff'}
+@attribute water-ready? {'no', 'yes'}
+@attribute material {'cotton', 'wool', 'synthetic', 'denim'}
+@attribute fit {'tight', 'loose', 'mid'}
+@attribute pattern {'solid', 'lines', 'faded', 'grid', 'floral', 'graphics'}
+@attribute contrast/vibrancy {'low', 'mid', 'high'}
+@attribute class {'minimalist', 'rustic', 'urban'}
+
+@data
+black,mid,thin,mid,low,no,1,hourglass,stretch,no,cotton,tight,solid,low,minimalist
+beige,long,thin,mid,low,no,1,flowy,stretch,no,wool,loose,solid,low,rustic
+blue,long,mid,high,mid,no,1,flowy,stretch,no,wool,loose,lines,mid,urban
+beige,long,mid,mid,low,no,1,flowy,mid,no,wool,loose,lines,low,rustic
+beige,short,mid,low,low,no,2,flowy,stretch,no,cotton,loose,solid,low,rustic
+black,mid,thin,low,mid,no,1,box,mid,yes,synthetic,mid,solid,mid,minimalist
+black,long,thin,low,high,no,1,hourglass,stretch,no,synthetic,tight,solid,low,urban
+white,long,thin,low,mid,yes,1,hourglass,stretch,no,cotton,tight,solid,low,urban
+black,mid,thin,low,high,yes,1,box,mid,no,synthetic,loose,solid,low,urban
+blue,mid,thin,low,high,yes,1,flowy,stretch,no,wool,mid,solid,high,urban
+blue,mid,mid,mid,low,no,1,box,stiff,no,denim,mid,faded,low,rustic
+pink,mid,thin,low,high,yes,1,flowy,stretch,no,wool,mid,solid,high,urban
+red,mid,thin,low,high,yes,1,flowy,stretch,no,wool,mid,solid,high,urban
+white,short,thin,mid,high,no,1,box,mid,yes,synthetic,mid,solid,low,minimalist
+grey,short,thin,mid,high,no,1,box,mid,yes,synthetic,mid,solid,low,minimalist
+pink,short,thin,mid,high,no,1,box,mid,yes,synthetic,mid,solid,mid,minimalist
+black,short,thin,low,high,no,1,flowy,mid,no,synthetic,loose,solid,low,urban
+black,mid,thick,high,high,yes,2,box,stiff,yes,synthetic,mid,grid,low,urban
+grey,short,thick,high,low,no,1,flowy,stretch,no,wool,loose,solid,low,rustic
+beige,short,thick,high,low,no,1,flowy,stretch,no,wool,loose,solid,low,rustic
+black,short,thin,low,mid,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+blue,short,thin,low,mid,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+beige,long,mid,high,high,no,1,flowy,mid,no,cotton,loose,solid,low,urban
+black,short,thin,low,mid,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+yellow,mid,thin,low,mid,yes,2,box,mid,no,synthetic,loose,solid,high,urban
+black,mid,thick,high,low,no,1,box,mid,no,wool,mid,solid,low,rustic
+red,mid,thin,mid,high,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+blue,mid,thin,mid,high,yes,1,flowy,stretch,no,cotton,mid,solid,high,urban
+black,long,thin,mid,mid,no,3,box,stiff,no,cotton,mid,grid,high,urban
+pink,long,thin,mid,mid,no,2,box,stiff,no,cotton,mid,grid,high,urban
+blue,short,thin,low,high,yes,1,hourglass,stretch,yes,synthetic,tight,solid,high,urban
+red,short,thin,low,high,yes,1,hourglass,stretch,yes,synthetic,tight,solid,high,urban
+green,short,thin,low,high,yes,1,box,mid,no,synthetic,loose,solid,high,urban
+pink,short,thin,low,high,yes,1,box,mid,no,synthetic,loose,solid,high,urban
+white,short,thin,low,mid,no,2,box,mid,no,cotton,loose,lines,high,urban
+grey,mid,thick,high,low,no,1,flowy,mid,no,wool,loose,solid,low,rustic
+pink,long,thin,low,high,yes,2,flowy,stiff,no,cotton,mid,floral,low,urban
+yellow,long,thin,low,high,yes,2,flowy,stiff,no,cotton,mid,floral,low,urban
+black,short,thin,low,mid,no,4,box,mid,no,cotton,mid,graphics,high,urban
+grey,short,thin,low,mid,no,4,box,mid,no,cotton,mid,graphics,high,urban
+pink,short,thin,low,mid,no,3,box,mid,no,cotton,mid,graphics,high,urban
+pink,short,mid,low,mid,yes,1,hourglass,stretch,no,cotton,tight,solid,low,urban
+green,short,thin,low,high,yes,1,hourglass,mid,no,synthetic,tight,solid,high,urban
+green,short,thin,low,high,yes,1,hourglass,mid,no,synthetic,tight,solid,high,urban
+yellow,short,thin,low,high,yes,1,hourglass,mid,no,synthetic,tight,solid,high,urban
+green,short,thin,low,mid,yes,1,hourglass,mid,no,synthetic,tight,solid,low,urban
+black,long,thin,low,high,yes,1,flowy,mid,no,synthetic,mid,solid,low,urban
+black,short,thin,mid,high,no,4,hourglass,stretch,no,wool,tight,graphics,high,urban
+black,short,mid,mid,mid,no,3,hourglass,stretch,no,wool,tight,graphics,high,urban
+white,long,thin,mid,high,no,1,box,mid,no,synthetic,mid,solid,low,minimalist
+white,short,thin,mid,high,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+grey,long,thin,mid,high,yes,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+white,long,thin,mid,high,yes,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+beige,long,thin,mid,high,no,1,hourglass,stretch,yes,synthetic,tight,solid,low,minimalist
+beige,mid,mid,low,mid,yes,1,hourglass,stiff,no,wool,mid,solid,low,urban

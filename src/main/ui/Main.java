@@ -1,19 +1,22 @@
 package ui;
 
-import model.ArffWriter;
-import model.Entry;
-import model.EntryM;
-import model.MLAlgorithm;
+import model.*;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 public class Main {
     private static Scanner sc = new Scanner(System.in);
+    private static final String JSON_STORE = "./data/loce.json";
+    private static JsonWriter jsonWriter;
+
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public static void main(String[] args) throws Exception {
@@ -21,7 +24,8 @@ public class Main {
 
 
         System.out.println("you can create a new set of data entries to train your model by entering 'e', "
-                + "or classify new unlabled items by pressing 'c'.");
+                + "enter 'l' to load an csv file to generate arff file,"
+                + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
         String decision1 = sc.nextLine();
 
         while (true) {
@@ -35,19 +39,33 @@ public class Main {
 
                 System.out.println("arff file created, restart the program to take effect");
                 decision1 = sc.nextLine();
-            } else {
-                if (decision1.equals("c")) {
-                    List<Entry> loce = new ArrayList<>();
-                    inputClassifyData(loce);
-                    classify(loce);
+            } else if (decision1.equals("c")) {
+                List<Entry> loce = new ArrayList<>();
+                inputClassifyData(loce);
+                classify(loce);
 
-                    System.out.println(" create a new set of data entries to train your model by entering 'e',"
-                            + "or classify new unlabled items by pressing 'c'.");
-                    decision1 = sc.nextLine();
-                }
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
+            } else if (decision1.equals("l")) {
+                loadFile();
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
+
+            } else if (decision1.equals("lc")) {
+                List<Entry> loce = new ArrayList<>();
+                loadListOfClassifyingEntries(loce);
+                classify(loce);
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
             }
-        }
 
+        }
 
     }
 
@@ -89,11 +107,18 @@ public class Main {
         return filename;
     }
 
+    public static void loadFile() {
+        System.out.println("enter the absolute file path of your csv file:");
+        String filepath = sc.nextLine();
+        CsvLoader csvLoader = new CsvLoader();
+        csvLoader.loadFile(filepath);
+    }
+
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public static void inputClassifyData(List<Entry> loce) {
         System.out.println("you will now need to enter new items that havent been labled yet."
                 + "fill each parameter in order and seperated by ','."
-                + "enter #done when you are finished."
+                + "enter #done when you are finished. if you need to quit, save by entering '#quit'."
                 + " the attributes you need to fill are as follows:");
         while (true) {
             System.out.println("id  name  color  length  thickness   warmth   fabric-stich-density   shiny?"
@@ -101,6 +126,9 @@ public class Main {
                     + "fit     pattern   contrast");
             String entryInput = sc.nextLine();
             if (entryInput.equals("#done")) {
+                break;
+            } else if (entryInput.equals("#quit")) {
+                save(loce);
                 break;
             } else {
                 List<String> inputSplit = Arrays.asList(entryInput.split(","));
@@ -135,6 +163,27 @@ public class Main {
         }
     }
 
+    private static void save(List<Entry> loce) {
+        try {
+            jsonWriter = new JsonWriter(JSON_STORE);
+            jsonWriter.open();
+            jsonWriter.write(loce);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private static void loadListOfClassifyingEntries(List<Entry> loce) {
+        try {
+            JsonReader jsonReader = new JsonReader(JSON_STORE);
+            loce = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 }
 

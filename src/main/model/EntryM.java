@@ -12,7 +12,7 @@ public class EntryM {
     public final String warmth;
     public final String fabricStitchDensity;
     public final String shiny;
-    public final int numClors;
+    public final int numColors;
     public final String bodyLine;
     public final String stiffness;
     public final String waterResistance;
@@ -33,7 +33,7 @@ public class EntryM {
         this.warmth = warmth.trim();
         this.fabricStitchDensity = fabricStitchDensity.trim();
         this.shiny = shiny.trim();
-        this.numClors = numClors;
+        this.numColors = numClors;
         this.bodyLine = bodyLine.trim();
         this.stiffness = stiffness.trim();
         this.waterResistance = waterResistance.trim();

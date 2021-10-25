@@ -62,7 +62,7 @@ public class MLAlgorithm {
             i.setValue(3,e.warmth);
             i.setValue(4,e.fabricStitchDensity);
             i.setValue(5,e.shiny);
-            i.setValue(6,e.numClors);
+            i.setValue(6,e.numColors);
             i.setValue(7,e.bodyLine);
             i.setValue(8,e.stiffness);
             i.setValue(9,e.waterResistance);
