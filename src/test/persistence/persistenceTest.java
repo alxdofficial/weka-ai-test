@@ -58,13 +58,13 @@ public class persistenceTest {
                 "high","yes",1,"hourglass","stretch","yes",
                 "synthetic","tight","solid","low");
         loce.add(e);
-        JsonWriter jw = new JsonWriter("json write test");
+        JsonWriter jw = new JsonWriter("./data/json write test");
         try {
             jw.open();
             jw.write(loce);
             jw.close();
 
-            assertTrue(FileUtils.contentEquals(new File("json write test"),
+            assertTrue(FileUtils.contentEquals(new File("./data/json write test"),
                     new File("./data/json write test correct")));
         } catch (IOException ex) {
             fail("shouldnt throw exception");
