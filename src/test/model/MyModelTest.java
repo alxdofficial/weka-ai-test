@@ -84,8 +84,17 @@ class MyModelTest {
         assertEquals("urban", results.get(2).classifcication);
         assertEquals("rustic", results.get(3).classifcication);
 
+    }
 
-
+    @Test
+    void test3() {
+        CsvLoader csvLoader = new CsvLoader();
+        try {
+            assertTrue(FileUtils.directoryContains(new File("C:\\Users\\Malef\\IdeaProjects\\project_w4s0k"),new File("AQou.arff")));
+            csvLoader.loadFile("test csv.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

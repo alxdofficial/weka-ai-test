@@ -2,12 +2,10 @@ package persistence;
 import model.Entry;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,4 +51,23 @@ public class persistenceTest {
         }
     }
 
+    @Test
+    void writeTest() {
+        List<Entry> loce = new ArrayList<>();
+        Entry e = new Entry("2","item2","grey","long","thin","high",
+                "high","yes",1,"hourglass","stretch","yes",
+                "synthetic","tight","solid","low");
+        loce.add(e);
+        JsonWriter jw = new JsonWriter("json write test");
+        try {
+            jw.open();
+            jw.write(loce);
+            jw.close();
+
+            assertTrue(FileUtils.contentEquals(new File("json write test"),
+                    new File("./data/json write test correct")));
+        } catch (IOException ex) {
+            fail("shouldnt throw exception");
+        }
+    }
 }
