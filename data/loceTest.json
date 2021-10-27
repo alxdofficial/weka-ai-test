@@ -1,0 +1,38 @@
+{"loce": [
+    {
+        "color": "grey",
+        "warmth": "high",
+        "thickness": "thin",
+        "length": "long",
+        "pattern": "solid",
+        "numColors": 1,
+        "stiffness": "stretch",
+        "waterResistance": "yes",
+        "bodyLine": "hourglass",
+        "fit": "tight",
+        "itemName": "item2",
+        "material": "synthetic",
+        "contrastVibrancy": "low",
+        "shiny": "yes",
+        "id": "2",
+        "fabricStitchDensity": "high"
+    },
+    {
+        "color": "red",
+        "warmth": "high",
+        "thickness": "thick",
+        "length": "long",
+        "pattern": "solid",
+        "numColors": 1,
+        "stiffness": "stiff",
+        "waterResistance": "no",
+        "bodyLine": "hourglass",
+        "fit": "tight",
+        "itemName": "item1",
+        "material": "cotton",
+        "contrastVibrancy": "high",
+        "shiny": "no",
+        "id": "1",
+        "fabricStitchDensity": "high"
+    }
+]}
