@@ -179,7 +179,7 @@ public class Main {
     private static void loadListOfClassifyingEntries(List<Entry> loce) {
         try {
             JsonReader jsonReader = new JsonReader(JSON_STORE);
-            loce = jsonReader.read();
+            loce.addAll(jsonReader.read());
             System.out.println("Loaded from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
