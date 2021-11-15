@@ -14,7 +14,8 @@ public class CsvLoader {
     public CsvLoader(){
     }
 
-    public void loadFile(String filename) {
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    public String loadFile(String filename) {
         try {
             DataSource dataSource = new DataSource(filename);
             Instances instances = dataSource.getDataSet();
@@ -33,15 +34,14 @@ public class CsvLoader {
             String newFilename = arffWriter.createArffFromModelEntries(loe, "");
             System.out.println("remember this file name, you will need it later. your filename is:");
             System.out.println(newFilename);
-            System.out.println("arff file created, the program will shutdown, restart to keep using");
-            System.exit(0);
+            System.out.println("arff file created, please restart the program");
 
+            return newFilename;
 
         } catch (Exception e) {
             System.out.println("file does not exist or is of invalid type");
 
         }
-
-
+        return "";
     }
 }

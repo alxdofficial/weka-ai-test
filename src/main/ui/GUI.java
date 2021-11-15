@@ -56,8 +56,11 @@ public class GUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadFromCsv) {
-            LoadFromCsvPage lp = new LoadFromCsvPage();
             System.out.println("load from csv button pressed");
+            LoadFromCsvPage lp = new LoadFromCsvPage();
+        } else if (e.getSource() == addEntryM) {
+            System.out.println("entrym button pressed");
+            EntryMPage emp = new EntryMPage();
         }
     }
 }
