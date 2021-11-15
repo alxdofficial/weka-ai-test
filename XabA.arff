@@ -1,0 +1,19 @@
+@relation 'clothes.arff'
+@attribute color {'4'}
+@attribute length {'long'}
+@attribute thicness {'thick'}
+@attribute warmth {'low'}
+@attribute 'fabric stitch density' {'low'}
+@attribute shiny? {'yes'}
+@attribute 'num of colors' numeric
+@attribute 'body contour line' {'4'}
+@attribute stifness {'stiff'}
+@attribute water-ready? {'yes'}
+@attribute material {'4'}
+@attribute fit {'tight'}
+@attribute pattern {'4'}
+@attribute contrast/vibrancy {'low'}
+@attribute class {'4'}
+
+@data
+4,long,thick,low,low,yes,4,4,stiff,yes,4,tight,4,low,4

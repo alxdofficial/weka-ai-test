@@ -13,6 +13,7 @@ public class GUI implements ActionListener {
     JButton load;
     JButton loadFromCsv;
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public GUI() {
         frame = new JFrame();//creating instance of JFrame
         frame.setSize(1000,900);
