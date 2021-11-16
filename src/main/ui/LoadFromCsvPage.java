@@ -11,6 +11,7 @@ public class LoadFromCsvPage extends Component {
     private JFrame frame;
     private JPanel panel1;
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public LoadFromCsvPage() {
         frame = new JFrame();
         frame.setSize(1000,800);
