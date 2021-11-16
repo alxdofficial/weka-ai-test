@@ -78,7 +78,9 @@ class MyModelTest {
 
         assertEquals(loe,mla.getCatEntries());
 
-        List<Entry> results = mla.naiveBayesClassification("default_garments.arff",loe);
+        mla.naiveBayesClassification("default_garments.arff",loe);
+        List<Entry> results = mla.getCatEntries();
+
         assertEquals("rustic", results.get(0).classifcication);
         assertEquals("urban", results.get(1).classifcication);
         assertEquals("urban", results.get(2).classifcication);

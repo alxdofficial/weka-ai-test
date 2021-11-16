@@ -35,7 +35,7 @@ public class MLAlgorithm {
 
     //    EFFECTS: makes predictions for inputed list of data entries using ML model specified by filename
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public List<Entry> naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
+    public String naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
         DataSource data = new DataSource(filename);
 
         // Create dataset instances
@@ -48,10 +48,11 @@ public class MLAlgorithm {
         Instances test = datasetInstances;
         Evaluation eval = new Evaluation(test);
         eval.evaluateModel(nb,test);
-        System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+        String qualityReport = eval.toSummaryString("\nResults\n======\n", false);
 
 
-        List<Entry> answer = new ArrayList<>();
+        List<Entry> catResults = new ArrayList<>();
+
 // create instances of the unlabled entries and assigns them to the dataset of the trained ML model
         for (Entry e : loe) {
             Instance i = new DenseInstance(15);
@@ -76,10 +77,12 @@ public class MLAlgorithm {
             i.setClassValue(clsLabel);
             String clsLabelString = i.stringValue(datasetInstances.classAttribute());
             e.label(clsLabelString);
-            answer.add(e);
+            catResults.add(e);
         }
 
-        return answer;
+        this.categorizationEntries = catResults;
+        return qualityReport;
+
     }
 
     //    EFFECTS: get entries about to be used for categorization
