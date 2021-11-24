@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CsvLoader {
 
-    public CsvLoader(){
+    public CsvLoader() {
         EventLog.getInstance().logEvent(new Event("new csvloader created"));
     }
 
