@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class ArffWriter {
-    
+
     public ArffWriter() {
-        
+        EventLog.getInstance().logEvent(new Event("new arffwriter created"));
     }
 
     //    EFFECTS: takes in a list of dataset entries and a file name.
@@ -31,9 +31,12 @@ public class ArffWriter {
         }
         fileName += ".arff";
 
+        EventLog.getInstance().logEvent(new Event("new arff file is called " + fileName));
 
         // create empty file at location
         File newArff = new File(fileName);
+
+        EventLog.getInstance().logEvent(new Event("new empty arff file created"));
 
         //prep strings for the header of the arff file
         String colorUnique = "@attribute color {";
@@ -130,6 +133,7 @@ public class ArffWriter {
         classifcicationUnique = classifcicationUnique.substring(0, classifcicationUnique.length() - 2);
         classifcicationUnique += "}";
 
+        EventLog.getInstance().logEvent(new Event(" arff file headers setup"));
 
         // actually writing to strings crreate above to the empty file
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
@@ -180,8 +184,12 @@ public class ArffWriter {
             writer.write(line);
             writer.newLine();
         }
+
+        EventLog.getInstance().logEvent(new Event("done writing entries"));
+
         writer.flush();
         writer.close();
+        EventLog.getInstance().logEvent(new Event("arff file writing complete"));
         return fileName;
     }
 }

@@ -42,7 +42,7 @@ public class EntryM {
         this.pattern = pattern.trim();
         this.contrastVibrancy = contrastVibrancy.trim();
         this.classifcication = classifcication.trim();
-
+        EventLog.getInstance().logEvent(new Event("new model entry created"));
     }
 
 

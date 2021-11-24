@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 
 import javax.swing.*;
@@ -7,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Iterator;
 
 public class Main implements ActionListener {
     JFrame frame;
@@ -20,6 +23,19 @@ public class Main implements ActionListener {
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public Main() {
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+
+                System.out.println("\n\n\n Log:");
+                Iterator<Event> events = EventLog.getInstance().iterator();
+                for (Iterator<Event> it = events; it.hasNext(); ) {
+                    Event e = it.next();
+                    System.out.println(e.toString());
+                }
+            }
+        }));
+
         frame = new JFrame();//creating instance of JFrame
         frame.setSize(1000,900);
 

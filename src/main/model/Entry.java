@@ -25,6 +25,7 @@ public class Entry {
     public final String pattern;
     public final String contrastVibrancy;
 
+
     @SuppressWarnings({"checkstyle:VisibilityModifier", "checkstyle:SuppressWarnings"})
     public String classifcication;
 
@@ -50,12 +51,13 @@ public class Entry {
         this.fit = fit.trim();
         this.pattern = pattern.trim();
         this.contrastVibrancy = contrastVibrancy.trim();
-
+        EventLog.getInstance().logEvent(new Event("new classifying entry created"));
     }
 
 
     public void label(String classifcication) {
         this.classifcication = classifcication;
+        EventLog.getInstance().logEvent(new Event("classi-entry labeld"));
     }
 
     public JSONObject toJson() {

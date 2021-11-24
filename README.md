@@ -48,3 +48,50 @@ this program allows for double standards instead of absolute values in each attr
 15. classification         (one of {rustic, urban, minimalist})
 
 of course, if you were to build your own machine learning model, you may use any enumeration of values for the attributes.
+
+
+
+example log:
+
+Log:
+Tue Nov 23 16:37:59 PST 2021
+new model entry created
+
+Tue Nov 23 16:38:10 PST 2021
+new arffwriter created
+
+Tue Nov 23 16:38:10 PST 2021
+new arff file is called default_garments.arffuz4f.arff
+
+Tue Nov 23 16:38:10 PST 2021
+new empty arff file created
+
+Tue Nov 23 16:38:10 PST 2021
+arff file headers setup
+
+Tue Nov 23 16:38:10 PST 2021
+done writing entries
+
+Tue Nov 23 16:38:10 PST 2021
+arff file writing complete
+
+Tue Nov 23 16:39:54 PST 2021
+new classifying entry created
+
+Tue Nov 23 16:40:06 PST 2021
+new MLAlgorithm created
+
+Tue Nov 23 16:40:06 PST 2021
+naive bayes successfully found data in filepath
+
+Tue Nov 23 16:40:07 PST 2021
+naive bayes construction success
+
+Tue Nov 23 16:40:07 PST 2021
+cross checking complete and summary text generated
+
+Tue Nov 23 16:40:07 PST 2021
+classi-entry labeld
+
+Tue Nov 23 16:40:07 PST 2021
+classification results successfully converted to list of classi-entries

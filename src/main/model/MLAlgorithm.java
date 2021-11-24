@@ -22,13 +22,14 @@ public class MLAlgorithm {
 
     public MLAlgorithm() {
         categorizationEntries = new ArrayList<>();
-
+        EventLog.getInstance().logEvent(new Event("new MLAlgorithm created"));
     }
 
 //    MODIFIES: this
 //    EFFECTS: add to the list of entrys used for categorization
     public void addToCatEntry(List<Entry> loe) {
         categorizationEntries.addAll(loe);
+        EventLog.getInstance().logEvent(new Event("finished adding classi-entries to mlalgorithm"));
     }
 
 
@@ -37,19 +38,20 @@ public class MLAlgorithm {
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public String naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
         DataSource data = new DataSource(filename);
-
+        EventLog.getInstance().logEvent(new Event("naive bayes successfully found data in filepath"));
         // Create dataset instances
         Instances datasetInstances = data.getDataSet();
         datasetInstances.setClassIndex(datasetInstances.numAttributes() - 1);
         //new naive bayes
         NaiveBayes nb = new NaiveBayes();
         nb.buildClassifier(datasetInstances);
+        EventLog.getInstance().logEvent(new Event("naive bayes construction success"));
         //cross validation and sumary printing
         Instances test = datasetInstances;
         Evaluation eval = new Evaluation(test);
         eval.evaluateModel(nb,test);
         String qualityReport = eval.toSummaryString("\nResults\n======\n", false);
-
+        EventLog.getInstance().logEvent(new Event("cross checking complete and summary text generated"));
 
         List<Entry> catResults = new ArrayList<>();
 
@@ -79,6 +81,9 @@ public class MLAlgorithm {
             e.label(clsLabelString);
             catResults.add(e);
         }
+
+        EventLog.getInstance().logEvent(new Event("classification results successfully"
+                + " converted to list of classi-entries"));
 
         this.categorizationEntries = catResults;
         return qualityReport;
