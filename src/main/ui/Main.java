@@ -4,10 +4,13 @@ import model.Event;
 import model.EventLog;
 import persistence.JsonReader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -61,6 +64,19 @@ public class Main implements ActionListener {
         JTextArea textarea1 = new JTextArea("Welcome to the clothing design style machine learning algorithm");
         textarea1.setSize(380, 20);
         textarea1.setVisible(true);
+
+        BufferedImage mainPic = null;
+        try {
+            mainPic = ImageIO.read(new File("0__VH001TPrUWwoFPh.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert mainPic != null;
+        JLabel picLabel = new JLabel(new ImageIcon(mainPic));
+        picLabel.setVisible(true);
+        picLabel.setBounds(0, 500, 800, 600);
+        frame.add(picLabel);
+
 
         panel.setVisible(true);
         frame.getContentPane().add(panel);
