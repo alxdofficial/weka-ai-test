@@ -1,6 +1,5 @@
 package ui;
 
-import model.Entry;
 import model.EntryM;
 
 import javax.swing.*;

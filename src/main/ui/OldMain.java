@@ -3,7 +3,6 @@ package ui;
 import model.*;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +39,7 @@ public class OldMain {
                 System.out.println("arff file created, restart the program to take effect");
                 decision1 = sc.nextLine();
             } else if (decision1.equals("c")) {
-                List<Entry> loce = new ArrayList<>();
+                List<EntryC> loce = new ArrayList<>();
                 inputClassifyData(loce);
                 classify(loce);
 
@@ -56,7 +55,7 @@ public class OldMain {
                 decision1 = sc.nextLine();
 
             } else if (decision1.equals("lc")) {
-                List<Entry> loce = new ArrayList<>();
+                List<EntryC> loce = new ArrayList<>();
                 loadListOfClassifyingEntries(loce);
                 classify(loce);
                 System.out.println("you can create a new set of data entries to train your model by entering 'e', "
@@ -115,7 +114,7 @@ public class OldMain {
     }
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public static void inputClassifyData(List<Entry> loce) {
+    public static void inputClassifyData(List<EntryC> loce) {
         System.out.println("you will now need to enter new items that havent been labled yet."
                 + "fill each parameter in order and seperated by ','."
                 + "enter #done when you are finished. if you need to quit, save by entering '#quit'."
@@ -135,28 +134,28 @@ public class OldMain {
                 for (String s:inputSplit) {
                     s = s.trim();
                 }
-                Entry newEntry = new Entry(inputSplit.get(0),inputSplit.get(1),inputSplit.get(2),
+                EntryC newEntryC = new EntryC(inputSplit.get(0),inputSplit.get(1),inputSplit.get(2),
                         inputSplit.get(3),inputSplit.get(4),inputSplit.get(5),inputSplit.get(6),
                         inputSplit.get(7),Integer.parseInt(inputSplit.get(8)),inputSplit.get(9),
                         inputSplit.get(10),
                         inputSplit.get(11),inputSplit.get(12),inputSplit.get(13),inputSplit.get(14),
                         inputSplit.get(15));
-                loce.add(newEntry);
+                loce.add(newEntryC);
             }
         }
     }
 
 
 
-    public static void classify(List<Entry> loce) throws Exception {
+    public static void classify(List<EntryC> loce) throws Exception {
         System.out.println("now enter the filename indicating the model you want to use "
                     + "to classify your newly added items. after the program"
                     + " runs the model, you will see a evaluation sumary, and then your results");
         String input3 = sc.nextLine();
         MLAlgorithm mla = new MLAlgorithm();
         mla.naiveBayesClassification(input3, loce);
-        List<Entry> results = mla.getCatEntries();
-        for (Entry e : results) {
+        List<EntryC> results = mla.getCatEntries();
+        for (EntryC e : results) {
             System.out.print(e.id + "   ");
             System.out.print(e.itemName + "   ");
             System.out.print(e.classifcication);
@@ -164,7 +163,7 @@ public class OldMain {
         }
     }
 
-    private static void save(List<Entry> loce) {
+    private static void save(List<EntryC> loce) {
         try {
             jsonWriter = new JsonWriter(JSON_STORE);
             jsonWriter.open();
@@ -177,7 +176,7 @@ public class OldMain {
         System.exit(0);
     }
 
-    private static void loadListOfClassifyingEntries(List<Entry> loce) {
+    private static void loadListOfClassifyingEntries(List<EntryC> loce) {
         try {
             JsonReader jsonReader = new JsonReader(JSON_STORE);
             loce.addAll(jsonReader.read());

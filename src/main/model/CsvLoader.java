@@ -33,7 +33,7 @@ public class CsvLoader {
 
                 loe.add(e);
             }
-            EventLog.getInstance().logEvent(new Event("done converting arff data instances to Entry objects"));
+            EventLog.getInstance().logEvent(new Event("done converting arff data instances to EntryC objects"));
             ArffWriter arffWriter = new ArffWriter();
             String newFilename = arffWriter.createArffFromModelEntries(loe, "");
             System.out.println("remember this file name, you will need it later. your filename is:");

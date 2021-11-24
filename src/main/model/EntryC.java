@@ -7,7 +7,7 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class Entry {
+public class EntryC {
     public final String id;
     public final String itemName;
     public final String color;
@@ -31,10 +31,11 @@ public class Entry {
 
     // EFFECTS create a new entry and trims leading and trailing spaces
 
-    public Entry(String id, String itemName, String color, String length, String thickness, String warmth,
-                 String fabricStitchDensity,
-                 String shiny, int numClors, String bodyLine, String stiffness, String waterResistance, String material,
-                 String fit, String pattern, String contrastVibrancy) {
+    public EntryC(String id, String itemName, String color, String length, String thickness, String warmth,
+                  String fabricStitchDensity,
+                  String shiny, int numClors, String bodyLine, String stiffness, String waterResistance,
+                  String material,
+                  String fit, String pattern, String contrastVibrancy) {
         this.id = id.trim();
         this.itemName = itemName.trim();
         this.color = color.trim();

@@ -51,6 +51,8 @@ of course, if you were to build your own machine learning model, you may use any
 
 
 
+
+###Phase 4: Task 2
 example log:
 
 Log:
@@ -95,3 +97,13 @@ classi-entry labeld
 
 Tue Nov 23 16:40:07 PST 2021
 classification results successfully converted to list of classi-entries
+
+
+
+###Phase 4: Task 3
+future revisions:
+
+1. i would refactor the classes: EntryM and EntryC into a common super class called Entry. 
+2. i would refactor the UI pages: EntryM page and EntryC page into a superclass called DataInputPage. 
+3. i would refactor the Popups: SaveToArff and ChooseArffForClassification into a superclass called NameInputPopup.
+4. i would add a new class called EntryParser that has methods parse() and toString() so creating new EntryC and EntryMs can be done through a String and not 15 parameters.

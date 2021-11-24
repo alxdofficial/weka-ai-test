@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Entry;
+import model.EntryC;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,7 +27,7 @@ public class JsonReader {
 
     // EFFECTS: reads loce from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public List<Entry> read() throws IOException {
+    public List<EntryC> read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLoce(jsonObject);
@@ -46,8 +46,8 @@ public class JsonReader {
 
     // EFFECTS: parses list of entries for classification from JSON object and returns it
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private List<Entry> parseLoce(JSONObject jsonObject) {
-        List<Entry> loce = new ArrayList<>();
+    private List<EntryC> parseLoce(JSONObject jsonObject) {
+        List<EntryC> loce = new ArrayList<>();
         JSONArray jsonArray = jsonObject.getJSONArray("loce");
         for (Object json : jsonArray) {
             JSONObject e = (JSONObject) json;
@@ -68,10 +68,10 @@ public class JsonReader {
             String pattern = e.getString("pattern");
             String contrastVibrancy = e.getString("contrastVibrancy");
 
-            Entry newEntry = new Entry(id, itemName, color, length, thickness, warmth, fabricStitchDensity,
+            EntryC newEntryC = new EntryC(id, itemName, color, length, thickness, warmth, fabricStitchDensity,
                     shiny, numColors, bodyLine, stiffness, waterResistance, material, fit, pattern, contrastVibrancy);
 
-            loce.add(newEntry);
+            loce.add(newEntryC);
 
         }
         return loce;

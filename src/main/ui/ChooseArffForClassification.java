@@ -1,22 +1,20 @@
 package ui;
 
-import model.ArffWriter;
-import model.Entry;
+import model.EntryC;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.List;
 
 public class ChooseArffForClassification implements ActionListener {
-    List<Entry> loe;
+    List<EntryC> loe;
     JTextField tf;
     JButton choose;
 
     @SuppressWarnings({"checkstyle:LocalVariableName", "checkstyle:SuppressWarnings"})
-    public ChooseArffForClassification(List<Entry> loe) {
+    public ChooseArffForClassification(List<EntryC> loe) {
         tf = new JTextField();
         choose = new JButton("choose");
         this.loe = loe;

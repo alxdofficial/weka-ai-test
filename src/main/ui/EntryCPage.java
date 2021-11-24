@@ -1,7 +1,6 @@
 package ui;
 
-import model.Entry;
-import model.EntryM;
+import model.EntryC;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -16,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 public class EntryCPage implements ActionListener {
-    private List<Entry> loe;
+    private List<EntryC> loe;
     private JFrame frame;
     private JPanel mainPanel;
     private JPanel existingInputs;
     private static final String JSON_STORE = "./data/loce.json";
 
-    private Map<JButton,Entry> mapOfInputs;
+    private Map<JButton, EntryC> mapOfInputs;
 
     private final String[] levelChoices = {"low", "mid", "high"};
     private final String[] booleanChoices = {"yes", "no"};
@@ -51,7 +50,7 @@ public class EntryCPage implements ActionListener {
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public EntryCPage() {
-        loe = new ArrayList<Entry>();
+        loe = new ArrayList<EntryC>();
         mapOfInputs = new LinkedHashMap<>();
 
         frame = new JFrame();
@@ -257,7 +256,7 @@ public class EntryCPage implements ActionListener {
         existingInputs.setLayout(new BoxLayout(existingInputs,BoxLayout.Y_AXIS));
         existingInputs.removeAll();
 
-        for (Map.Entry<JButton,Entry> e : mapOfInputs.entrySet()) {
+        for (Map.Entry<JButton, EntryC> e : mapOfInputs.entrySet()) {
             JLabel idtext = new JLabel(e.getValue().id);
             JLabel itemNametext = new JLabel(e.getValue().itemName);
             JLabel colortext = new JLabel(e.getValue().color);
@@ -328,7 +327,7 @@ public class EntryCPage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         if (button == addButton) {
-            Entry newEntry = new Entry(idField.getText(), itemNameField.getText(),
+            EntryC newEntryC = new EntryC(idField.getText(), itemNameField.getText(),
                     colorField.getText(), lengthField.getSelectedItem().toString(),
                     thickField.getSelectedItem().toString(), warmthField.getSelectedItem().toString(),
                     densityField.getSelectedItem().toString(), shinyField.getSelectedItem().toString(),
@@ -337,11 +336,11 @@ public class EntryCPage implements ActionListener {
                     materialField.getText().toString(), fitField.getSelectedItem().toString(),
                     patternField.getText().toString(),contrastField.getSelectedItem().toString());
 
-            loe.add(newEntry);
+            loe.add(newEntryC);
             JButton b = new JButton("delete");
             b.setVisible(true);
             b.addActionListener(this);
-            mapOfInputs.put(b, newEntry);
+            mapOfInputs.put(b, newEntryC);
             displayInputs();
         } else if (button.getText() ==  "delete") {
             mapOfInputs.remove(e.getSource());

@@ -2,22 +2,18 @@ package model;
 
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.evaluation.Prediction;
 import weka.core.*;
-import weka.core.converters.ConverterUtils;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.core.Instance;
 import weka.core.Instances;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
-import java.lang.Character;
 
 
 public class MLAlgorithm {
-    private List<Entry> categorizationEntries;
+    private List<EntryC> categorizationEntries;
 
 
     public MLAlgorithm() {
@@ -27,7 +23,7 @@ public class MLAlgorithm {
 
 //    MODIFIES: this
 //    EFFECTS: add to the list of entrys used for categorization
-    public void addToCatEntry(List<Entry> loe) {
+    public void addToCatEntry(List<EntryC> loe) {
         categorizationEntries.addAll(loe);
         EventLog.getInstance().logEvent(new Event("finished adding classi-entries to mlalgorithm"));
     }
@@ -36,7 +32,7 @@ public class MLAlgorithm {
 
     //    EFFECTS: makes predictions for inputed list of data entries using ML model specified by filename
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public String naiveBayesClassification(String filename, List<Entry> loe) throws Exception {
+    public String naiveBayesClassification(String filename, List<EntryC> loe) throws Exception {
         DataSource data = new DataSource(filename);
         EventLog.getInstance().logEvent(new Event("naive bayes successfully found data in filepath"));
         // Create dataset instances
@@ -53,10 +49,10 @@ public class MLAlgorithm {
         String qualityReport = eval.toSummaryString("\nResults\n======\n", false);
         EventLog.getInstance().logEvent(new Event("cross checking complete and summary text generated"));
 
-        List<Entry> catResults = new ArrayList<>();
+        List<EntryC> catResults = new ArrayList<>();
 
 // create instances of the unlabled entries and assigns them to the dataset of the trained ML model
-        for (Entry e : loe) {
+        for (EntryC e : loe) {
             Instance i = new DenseInstance(15);
             i.setDataset(datasetInstances);
             i.setValue(0,e.color);
@@ -91,7 +87,7 @@ public class MLAlgorithm {
     }
 
     //    EFFECTS: get entries about to be used for categorization
-    public List<Entry> getCatEntries() {
+    public List<EntryC> getCatEntries() {
         return categorizationEntries;
     }
 

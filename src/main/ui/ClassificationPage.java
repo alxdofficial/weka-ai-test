@@ -1,23 +1,22 @@
 package ui;
 
-import model.Entry;
+import model.EntryC;
 import model.MLAlgorithm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClassificationPage {
 
-    private List<Entry> loe;
+    private List<EntryC> loe;
     private MLAlgorithm mla;
     private String arffName;
     private JFrame frame;
     private JPanel mainPanel;
     private JPanel resultsPanel;
 
-    public ClassificationPage(List<Entry> loe,String arffName) {
+    public ClassificationPage(List<EntryC> loe, String arffName) {
         this.loe = loe;
         mla = new MLAlgorithm();
         frame = new JFrame();
@@ -56,9 +55,9 @@ public class ClassificationPage {
     @SuppressWarnings({"checkstyle:LocalVariableName", "checkstyle:SuppressWarnings"})
     private void displayResults() {
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-        List<Entry> listOfResults = mla.getCatEntries();
+        List<EntryC> listOfResults = mla.getCatEntries();
 
-        for (Entry e : listOfResults) {
+        for (EntryC e : listOfResults) {
             JPanel resultPanel = new JPanel();
             resultPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 30));
 

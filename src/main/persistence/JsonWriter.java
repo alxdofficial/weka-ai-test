@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Entry;
+import model.EntryC;
 import org.json.*;
 
 import java.io.File;
@@ -32,11 +32,11 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of list of entries to file
-    public void write(List<Entry> loce) {
+    public void write(List<EntryC> loce) {
 
         JSONObject mainJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Entry e : loce) {
+        for (EntryC e : loce) {
             JSONObject json = e.toJson();
             jsonArray.put(json);
         }
