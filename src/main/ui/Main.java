@@ -1,115 +1,190 @@
 package ui;
 
-import model.Event;
-import model.EventLog;
-import persistence.JsonReader;
+import model.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-public class Main implements ActionListener {
-    JFrame frame;
-    JPanel panel;
-    JButton addEntryM;
-    JButton addEntryC;
-    JButton load;
-    JButton loadFromCsv;
-
+public class Main {
+    private static Scanner sc = new Scanner(System.in);
     private static final String JSON_STORE = "./data/loce.json";
+    private static JsonWriter jsonWriter;
+
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public Main() {
+    public static void main(String[] args) throws Exception {
+        System.out.println("welcome to the clothing-design-style machine-learning classifier");
 
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
 
-                System.out.println("\n\n\n Log:");
-                Iterator<Event> events = EventLog.getInstance().iterator();
-                for (Iterator<Event> it = events; it.hasNext(); ) {
-                    Event e = it.next();
-                    System.out.println(e.toString());
+        System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                + "enter 'l' to load an csv file to generate arff file,"
+                + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+        String decision1 = sc.nextLine();
+
+        while (true) {
+            if (decision1.equals("e")) {
+                System.out.println("enter a filename for your arff file to be stored in the project directory,"
+                        + " or provide a absolute file-path");
+                String filename = sc.nextLine();
+                List<EntryM> loe = new ArrayList<>();
+                addModelEntry(loe,filename);
+                filename = writeEntryToArff(loe,filename);
+
+                System.out.println("arff file created, restart the program to take effect");
+                decision1 = sc.nextLine();
+            } else if (decision1.equals("c")) {
+                List<EntryC> loce = new ArrayList<>();
+                inputClassifyData(loce);
+                classify(loce);
+
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
+            } else if (decision1.equals("l")) {
+                loadFile();
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
+
+            } else if (decision1.equals("lc")) {
+                List<EntryC> loce = new ArrayList<>();
+                loadListOfClassifyingEntries(loce);
+                classify(loce);
+                System.out.println("you can create a new set of data entries to train your model by entering 'e', "
+                        + "enter 'l' to load an csv file to generate arff file,"
+                        + ", classify new unlabled items by pressing 'c', or load json to classify by entering 'lc'.");
+                decision1 = sc.nextLine();
+            }
+
+        }
+
+    }
+
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    public static void addModelEntry(List<EntryM> loe, String filename) throws IOException {
+        System.out.println("each garment is described by the following attributes. "
+                + "fill out each attribute in order " + "seperated by ','. when you are done one item "
+                + ", just press enter to enter the next item. once you are done all items, "
+                + "enter '#done' to continue");
+        while (true) {
+            System.out.println("color  length   thickness   warmth   fabric-stich-density   shiny?  "
+                    + "num-of-colors   body-contour-line   stiffness   water-resistance    material     "
+                    + "fit     pattern   contrast   classification");
+            String entryInput = sc.nextLine();
+            if (entryInput.contains("#done")) {
+                break;
+            } else {
+                List<String> inputSplit = Arrays.asList(entryInput.split(","));
+                for (String s : inputSplit) {
+                    s = s.trim();
                 }
+                EntryM newModelEntry = new EntryM(inputSplit.get(0),inputSplit.get(1),inputSplit.get(2),
+                        inputSplit.get(3),inputSplit.get(4),inputSplit.get(5),Integer.parseInt(inputSplit.get(6)),
+                        inputSplit.get(7), inputSplit.get(8),inputSplit.get(9),inputSplit.get(10),
+                        inputSplit.get(11),
+                        inputSplit.get(12), inputSplit.get(13),inputSplit.get(14));
+                loe.add(newModelEntry);
             }
-        }));
-
-        frame = new JFrame();//creating instance of JFrame
-        frame.setSize(1000,900);
-
-        panel = new JPanel(new GridLayout(2,2,20,20));
-        panel.setBounds(30,30, 600, 400);
-        addEntryM = new JButton("add model entries");//creating instance of JButton
-        addEntryM.setMinimumSize(new Dimension(200,80));
-        addEntryM.addActionListener(this);
-        panel.add(addEntryM); //adding button in JFrame
-        addEntryC = new JButton("add classifying entries");//creating instance of JButton
-        addEntryC.setMinimumSize(new Dimension(200,80));
-        addEntryC.addActionListener(this);
-        panel.add(addEntryC); //adding button in JFrame
-        load = new JButton("load classifying entries");//creating instance of JButton
-        load.setMinimumSize(new Dimension(200,80));
-        load.addActionListener(this);
-        panel.add(load); //adding button in JFrame
-        loadFromCsv = new JButton("load model entries from CSV");//creating instance of JButton
-        loadFromCsv.setMinimumSize(new Dimension(200,80));
-        loadFromCsv.addActionListener(this);
-        panel.add(loadFromCsv); //adding button in JFrame
-
-        JTextArea textarea1 = new JTextArea("Welcome to the clothing design style machine learning algorithm");
-        textarea1.setSize(380, 20);
-        textarea1.setVisible(true);
-
-        BufferedImage mainPic = null;
-        try {
-            mainPic = ImageIO.read(new File("0__VH001TPrUWwoFPh.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        assert mainPic != null;
-        JLabel picLabel = new JLabel(new ImageIcon(mainPic));
-        picLabel.setVisible(true);
-        picLabel.setBounds(0, 500, 800, 600);
-        frame.add(picLabel);
+    }
 
+    public static String writeEntryToArff(List<EntryM> loe, String filename) throws IOException {
+        ArffWriter af = new ArffWriter();
+        filename = af.createArffFromModelEntries(loe, filename);
+        System.out.println("cool, your arff file has been created, remember your file name below because "
+                + "thats how you select it as your classfification model");
+        System.out.println(filename);
+        System.out.println("...");
+        return filename;
+    }
 
-        panel.setVisible(true);
-        frame.getContentPane().add(panel);
-        frame.getContentPane().add(textarea1);
-        frame.setVisible(true);//making the frame visible
-
-
+    public static void loadFile() {
+        System.out.println("enter the absolute file path of your csv file:");
+        String filepath = sc.nextLine();
+        CsvLoader csvLoader = new CsvLoader();
+        csvLoader.loadFile(filepath);
     }
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public static void main(String[] args) {
-        Main main = new Main();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loadFromCsv) {
-            System.out.println("load from csv button pressed");
-            LoadFromCsvPage lp = new LoadFromCsvPage();
-        } else if (e.getSource() == addEntryM) {
-            System.out.println("entrym button pressed");
-            EntryMPage emp = new EntryMPage();
-        } else if (e.getSource() == addEntryC) {
-            System.out.println("entryc button pressed");
-            EntryCPage ecp = new EntryCPage();
-        } else if (e.getSource() == load) {
-            JsonReader jr = new JsonReader(JSON_STORE);
-            try {
-                ChooseArffForClassification cr = new ChooseArffForClassification(jr.read());
-            } catch (IOException ex) {
-                ex.printStackTrace();
+    public static void inputClassifyData(List<EntryC> loce) {
+        System.out.println("you will now need to enter new items that havent been labled yet."
+                + "fill each parameter in order and seperated by ','."
+                + "enter #done when you are finished. if you need to quit, save by entering '#quit'."
+                + " the attributes you need to fill are as follows:");
+        while (true) {
+            System.out.println("id  name  color  length  thickness   warmth   fabric-stich-density   shiny?"
+                    + "num-of-colors   body-contour-line   stiffness   water-resistance    material"
+                    + "fit     pattern   contrast");
+            String entryInput = sc.nextLine();
+            if (entryInput.equals("#done")) {
+                break;
+            } else if (entryInput.equals("#quit")) {
+                save(loce);
+                break;
+            } else {
+                List<String> inputSplit = Arrays.asList(entryInput.split(","));
+                for (String s:inputSplit) {
+                    s = s.trim();
+                }
+                EntryC newEntryC = new EntryC(inputSplit.get(0),inputSplit.get(1),inputSplit.get(2),
+                        inputSplit.get(3),inputSplit.get(4),inputSplit.get(5),inputSplit.get(6),
+                        inputSplit.get(7),Integer.parseInt(inputSplit.get(8)),inputSplit.get(9),
+                        inputSplit.get(10),
+                        inputSplit.get(11),inputSplit.get(12),inputSplit.get(13),inputSplit.get(14),
+                        inputSplit.get(15));
+                loce.add(newEntryC);
             }
         }
     }
+
+
+
+    public static void classify(List<EntryC> loce) throws Exception {
+        System.out.println("now enter the filename indicating the model you want to use "
+                    + "to classify your newly added items. after the program"
+                    + " runs the model, you will see a evaluation sumary, and then your results");
+        String input3 = sc.nextLine();
+        MLAlgorithm mla = new MLAlgorithm();
+        mla.naiveBayesClassification(input3, loce);
+        List<EntryC> results = mla.getCatEntries();
+        for (EntryC e : results) {
+            System.out.print(e.id + "   ");
+            System.out.print(e.itemName + "   ");
+            System.out.print(e.classifcication);
+            System.out.println("");
+        }
+    }
+
+    private static void save(List<EntryC> loce) {
+        try {
+            jsonWriter = new JsonWriter(JSON_STORE);
+            jsonWriter.open();
+            jsonWriter.write(loce);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+        System.exit(0);
+    }
+
+    private static void loadListOfClassifyingEntries(List<EntryC> loce) {
+        try {
+            JsonReader jsonReader = new JsonReader(JSON_STORE);
+            loce.addAll(jsonReader.read());
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }
 
