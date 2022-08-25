@@ -3,6 +3,8 @@ package ui;
 
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import model.*;
@@ -24,11 +26,9 @@ class ServerThread extends Thread {
 
             String text = "empty text";
             while(!text.equals("quit")) {
-                System.out.println("inside read loop");
                 text = reader.readLine();
-                System.out.println("read something, but might be null");
                 System.out.println(text);
-//                String reverseText = new StringBuilder(text).reverse().toString();
+
                 writer.println("Server: " + "java app got the message");
             }
             System.out.println("exited while loop");
@@ -38,6 +38,40 @@ class ServerThread extends Thread {
             ex.printStackTrace();
         }
     }
+
+
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    public static void demoinputClassifyData(List<EntryC> loce, String entryInput) {
+        System.out.println("id  name  color  length  thickness   warmth   fabric-stitch-density   shiny?"
+                + "num-of-colors   body-contour-line   stiffness   water-resistance    material"
+                + "fit     pattern   contrast");
+        List<String> inputSplit = Arrays.asList(entryInput.split(","));
+        for (String s:inputSplit) {
+            s = s.trim();
+        }
+        EntryC newEntryC = new EntryC(inputSplit.get(0),inputSplit.get(1),inputSplit.get(2),
+                inputSplit.get(3),inputSplit.get(4),inputSplit.get(5),inputSplit.get(6),
+                inputSplit.get(7),Integer.parseInt(inputSplit.get(8)),inputSplit.get(9),
+                inputSplit.get(10),
+                inputSplit.get(11),inputSplit.get(12),inputSplit.get(13),inputSplit.get(14),
+                inputSplit.get(15));
+        loce.add(newEntryC);
+    }
+
+
+
+    public static void democlassify(List<EntryC> loce) throws Exception {
+        MLAlgorithm mla = new MLAlgorithm();
+        mla.naiveBayesClassification("default_garments.arff", loce);
+        List<EntryC> results = mla.getCatEntries();
+        for (EntryC e : results) {
+            System.out.print(e.id + "   ");
+            System.out.print(e.itemName + "   ");
+            System.out.print(e.classifcication);
+            System.out.println("");
+        }
+    }
+
 }
 
 class TCPServer {
@@ -61,3 +95,4 @@ class TCPServer {
         }
     }
 }
+
